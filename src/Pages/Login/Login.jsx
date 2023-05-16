@@ -14,7 +14,7 @@ const Login = () => {
     return (
         <div className='px-2 md:px-0'>
         <Helmet>
-            <title>Login - eKapor</title>
+            <title>Login - eShop</title>
         </Helmet>
         <h1 className='text-3xl text-center font-semibold uppercase'>Login</h1>
         <form onSubmit={handleSubmit}>
