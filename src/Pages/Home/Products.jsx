@@ -7,11 +7,11 @@ import { toast } from 'react-hot-toast';
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [limit, setLimit] = useState(8);
     useEffect(() => {
-        axios.get('https://fakestoreapi.com/products')
+        axios.get(`https://fakestoreapi.com/products?limit=${limit}`)
           .then(response => {
             setProducts(response.data);
-            console.log(response.data)
             setIsLoading(false);
           })
           .catch(error => {
@@ -19,7 +19,12 @@ const Products = () => {
             console.log(error);
             setIsLoading(false);
           });
-      }, []);
+      }, [limit]);
+
+      const setLimitValue = () => {
+        setLimit(20);
+        setIsLoading(true);
+      }
 
       const setToCart = (product) => {
 
@@ -60,6 +65,12 @@ const Products = () => {
                 </div>
             )}
         </div >
+        <div className="flex justify-center">
+            <div className={isLoading && limit != 8 ? 'true' : 'hidden'}>
+                <Spinner></Spinner>
+            </div>
+            <button className={limit == 8 && !isLoading ? 'btn btn-base-200 w-60 mt-5' : 'hidden'} onClick={() => setLimitValue()}>Load More</button>
+        </div>
     </div >
     );
 };

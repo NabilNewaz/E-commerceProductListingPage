@@ -10,7 +10,6 @@ const Catagories = () => {
         axios.get('https://fakestoreapi.com/products/categories')
           .then(response => {
             setCatagories(response.data);
-            console.log(response.data)
             setIsLoading(false);
           })
           .catch(error => {
