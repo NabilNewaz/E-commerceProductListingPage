@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { GiLoincloth } from "react-icons/gi";
 import { RiMenuUnfoldFill } from "react-icons/ri";
 
 const Navbar = () => {
+    const location = useLocation();
     const [user, setUser] = useState([]);
     const handleLogOut = () => {
 
