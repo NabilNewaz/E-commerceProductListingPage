@@ -3,11 +3,14 @@ import Spinner from '../Shared/Spinner/Spinner';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { CartProvider, useCart } from "react-use-cart";
 
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [limit, setLimit] = useState(8);
+    const { addItem } = useCart();
+    
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products?limit=${limit}`)
           .then(response => {
@@ -27,7 +30,8 @@ const Products = () => {
       }
 
       const setToCart = (product) => {
-
+        addItem(product);
+        toast.success('Add Product to Cart Succefully');
       }
 
     return (
@@ -60,7 +64,7 @@ const Products = () => {
                         </div>
                     </Link>
                    <div className='bottom-0'>
-                        <button className="btn btn-base-200 w-full mt-5" onClick={() => setToCart(product)}>Add To Cart</button>
+                        <button className="btn btn-base-200 w-full mt-5" onClick={() =>setToCart(product)}>Add To Cart</button>
                    </div>
                 </div>
             )}

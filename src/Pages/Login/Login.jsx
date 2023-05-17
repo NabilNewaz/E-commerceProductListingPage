@@ -26,6 +26,11 @@ const Login = () => {
         axios.post('https://fakestoreapi.com/auth/login', {
             username: username,
             password: password,
+        }, {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json'
+            }
         })
         .then((response) => {
             localStorage.setItem('token', response.data.token);

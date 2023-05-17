@@ -5,14 +5,17 @@ import './index.css'
 import { HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'react-hot-toast'
 import Authprovider from './Contexts/Authprovider/Authprovider.jsx'
+import { CartProvider } from 'react-use-cart'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
       <Authprovider>
         <Toaster />
-        <App />
-      </Authprovider>
+          <CartProvider>
+              <App />
+          </CartProvider>
+        </Authprovider>
     </HelmetProvider>
   </React.StrictMode>,
 )

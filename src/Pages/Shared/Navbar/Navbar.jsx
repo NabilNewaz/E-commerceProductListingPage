@@ -4,6 +4,8 @@ import { GiLoincloth } from "react-icons/gi";
 import { RiMenuUnfoldFill } from "react-icons/ri";
 import { AuthContext } from '../../../Contexts/Authprovider/Authprovider';
 import Spinner from '../Spinner/Spinner';
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useCart } from 'react-use-cart';
 
 const Navbar = () => {
     const { user, userDetails, Logout,loading } = useContext(AuthContext);
@@ -11,6 +13,14 @@ const Navbar = () => {
     const handleLogOut = () => {
         Logout();
     }
+
+    const {
+        isEmpty,
+        totalUniqueItems,
+        items,
+        updateItemQuantity,
+        removeItem,
+      } = useCart();
 
     return (
         <div>
@@ -30,9 +40,57 @@ const Navbar = () => {
                     <Link to='/' className="font-bold text-3xl flex items-center normal-case"><GiLoincloth />eShop</Link>
                 </div>
                 <div className="navbar-end">
-                    <button className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost mr-1 btn-circle hidden md:flex">
+                    <button className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost mr-1 btn-circle md:flex">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </button>
+                    <div className={userDetails?.id ? 'block' : 'hidden'}>
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost mr-1 btn-circle md:flex"><AiOutlineShoppingCart className="h-5 w-5"></AiOutlineShoppingCart></label>
+                            <ul tabIndex={0} className="dropdown-content menu mt-3 p-2 shadow bg-base-100 rounded-box gap-1">
+                                {items.map((item) => (
+                                    <li>
+                                        <div className='flex flex-col md:flex-row bg-base-200 text-black'>
+                                            <div className='flex gap-3'>
+                                                <div className="avatar">
+                                                    <div className="w-16 mask mask-squircle">
+                                                        <img src={item.image} />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p className='w-40'>{item.title}</p>
+                                                </div>
+                                            </div>
+                                            <div className='flex gap-3 items-center'>
+                                                <div className="form-control">
+                                                    <label className="input-group">
+                                                        <span onClick={() => updateItemQuantity(item.id, item.quantity + 1)} className='w-10 hover:bg-slate-950 hover:text-white cursor-pointer'>+</span>
+                                                        <input disabled type="text" placeholder="1" value={item.quantity} className="input pointer-events-none input-bordered w-12 h-8" />
+                                                        <span onClick={() => updateItemQuantity(item.id, item.quantity - 1)} className='w-10 hover:bg-slate-950 hover:text-white cursor-pointer'>-</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <p className='font-semibold text-xl'>${item.itemTotal}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                ))}
+                                <li>
+                                    <div className='flex justify-between bg-primary text-white'>
+                                        <div>
+                                            <p className='font-semibold text-xl'>Total Price</p>
+                                        </div>
+                                        <div>
+                                            <p className='font-semibold text-xl'>$250</p>
+                                        </div>
+                                    </div>
+                                    <div className='mt-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold text-xl'>
+                                        <button className="w-full">Purchase Now</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div className={loading ? 'block' : 'hidden'}>
                         <Spinner></Spinner>
                     </div>
