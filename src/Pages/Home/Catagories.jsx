@@ -30,7 +30,7 @@ const Catagories = () => {
         </div>
         <div className='grid gap-3 lg:grid-cols-4 md:grid-cols-2'>
             {categories.map(category =>
-                <>
+                <div key={category}>
                     <Link to={`/category/${category}`}>
                         <div className="card bg-base-100 shadow-xl">
                             <div className="card-body lg:py-14">
@@ -40,10 +40,10 @@ const Catagories = () => {
                             </div>
                         </div>
                     </Link>
-                </>
+                </div>
             )}
-        </div >
-    </div >
+        </div>
+    </div>
     );
 };
 

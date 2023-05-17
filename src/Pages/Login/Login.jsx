@@ -1,14 +1,54 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { toast } from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/Authprovider/Authprovider';
 
 const Login = () => {
+    const { user, setUser, userDetails, setLoading } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    if (userDetails?.id) {
+        console.log(user)
+        navigate('/');
+        toast('Already Logged In');
+    }
+
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
-        const email = form.email.value;
+        const username = form.username.value;
         const password = form.password.value;
 
-        
+        axios.post('https://fakestoreapi.com/auth/login', {
+            username: username,
+            password: password,
+        })
+        .then((response) => {
+            localStorage.setItem('token', response.data.token);
+            axios.get(`https://fakestoreapi.com/users`)
+            .then(response => {
+                const userDetails = response.data.find(user => {
+                    return user.username == username && user.password == password;
+                 })
+                 localStorage.setItem('userId', userDetails.id);
+                 localStorage.setItem('password', userDetails.password);
+                 setLoading(true);
+                 setUser(true);
+                 toast.success('Successfully Logged In')
+                 navigate(from, { replace: true });
+            })
+            .catch(error => {
+                toast.error('API Not Working Properly');
+                console.log(error);
+            });
+        })
+        .catch((error) => {
+            toast.error('Wrong Username and Password');
+        });  
     }
 
     return (
@@ -20,9 +60,9 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
             <div className="form-control w-full mx-auto max-w-md">
                 <label className="label">
-                    <span className="label-text font-semibold">Your Email</span>
+                    <span className="label-text font-semibold">Your Username</span>
                 </label>
-                <input name='email' type="email" required placeholder="name@gmail.com" className="input input-bordered w-full" />
+                <input name='username' type="text" required placeholder="Username" className="input input-bordered w-full" />
             </div>
             <div className="form-control w-full mx-auto max-w-md">
                 <label className="label">

@@ -36,7 +36,7 @@ const Products = () => {
             <h1 className='text-3xl uppercase font-bold'>Products</h1>
             <p className='text-md'>Find Your Needed Product From Here</p>
         </div>
-        <div className={isLoading ? 'block' : 'hidden'}>
+        <div className={isLoading ? 'block pt-8' : 'hidden'}>
             <Spinner></Spinner>
         </div>
         <div className='grid gap-3 lg:grid-cols-4 md:grid-cols-2'>
@@ -56,7 +56,7 @@ const Products = () => {
                             <h1 className="mb-4 font-semibold text-xl">
                                 $ {product.price}
                             </h1>
-                            <p className="text-md text-justify">{product.description.split('', 180)}... <Link to={`/product/${product.id}`} className='font-semibold'>Read More</Link></p>
+                            <p className="text-md text-justify">{product.description.split('', 180)}... <span className='font-semibold'>Read More</span></p>
                         </div>
                     </Link>
                    <div className='bottom-0'>
@@ -66,7 +66,7 @@ const Products = () => {
             )}
         </div >
         <div className="flex justify-center">
-            <div className={isLoading && limit != 8 ? 'true' : 'hidden'}>
+            <div className={isLoading && limit != 8 ? 'true pt-8' : 'hidden'}>
                 <Spinner></Spinner>
             </div>
             <button className={limit == 8 && !isLoading ? 'btn btn-base-200 w-60 mt-5' : 'hidden'} onClick={() => setLimitValue()}>Load More</button>
