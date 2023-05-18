@@ -149,12 +149,12 @@ const handelPurchase = () =>{
                                 </label>
                                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box gap-1">
                                     <li>
-                                        <div className='flex flex-col gap-0 justify-start bg-base-300'>
+                                        <div className='flex flex-col gap-0 justify-start bg-base-300 pointer-events-none'>
                                             <p className='font-bold text-warp capitalize'>{userDetails?.name?.firstname} {userDetails?.name?.lastname}</p>
                                             <p>{userDetails?.email}</p>
                                         </div>
                                     </li>
-                                    <li><NavLink to='/dashboard'>Profile</NavLink></li>
+                                    <li><NavLink to='/profile'>Profile</NavLink></li>
                                     <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
                                     <li><NavLink to='/purchase'>Purchase Report</NavLink></li>
                                     <hr />

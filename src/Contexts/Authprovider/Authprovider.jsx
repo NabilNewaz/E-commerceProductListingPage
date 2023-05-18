@@ -12,9 +12,9 @@ const Authprovider = ({ children }) => {
     const [loading, setLoading] = useState(null);
 
     useEffect(() => {
-        // if(localStorage.getItem('token')){
-        //     setUser(true);
-        // };
+        if(localStorage.getItem('token')){
+            setUser(true);
+        };
 
         if(localStorage.getItem('token')){
             setLoading(true);

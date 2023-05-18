@@ -9,13 +9,13 @@ import { CartProvider } from 'react-use-cart'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <Authprovider>
+    <Authprovider>
+      <HelmetProvider>
         <Toaster />
           <CartProvider>
               <App />
           </CartProvider>
-        </Authprovider>
-    </HelmetProvider>
+        </HelmetProvider>
+      </Authprovider>
   </React.StrictMode>,
 )
