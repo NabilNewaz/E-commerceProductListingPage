@@ -6,16 +6,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider/Authprovider';
 
 const Login = () => {
-    const { user, setUser, userDetails, setLoading } = useContext(AuthContext);
+    const { setUser, setLoading } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
-
-    if (userDetails?.id) {
-        console.log(user)
-        navigate('/');
-        toast('Already Logged In');
-    }
 
     const handleSubmit = event => {
         event.preventDefault();

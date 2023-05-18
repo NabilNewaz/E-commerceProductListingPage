@@ -4,7 +4,7 @@ import { GiLoincloth } from "react-icons/gi";
 import { RiMenuUnfoldFill } from "react-icons/ri";
 import { AuthContext } from '../../../Contexts/Authprovider/Authprovider';
 import Spinner from '../Spinner/Spinner';
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart, AiFillHome } from "react-icons/ai";
 import { useCart } from 'react-use-cart';
 import { MdDeleteForever } from "react-icons/md";
 import Sticky from 'react-stickynode';
@@ -46,7 +46,7 @@ const handelPurchase = () =>{
         .then((response) => {
             isapiLoading(true);
             emptyCart();
-            toast.success('Your Purchase Completed. Find Them in Purchse History')
+            toast.success('Your Purchase Completed. Find Them in Purchse Report')
             isapiLoading(false);
         })
         .catch((error) => {
@@ -61,12 +61,11 @@ const handelPurchase = () =>{
                 <div className="navbar bg-base-100">
                     <div className="navbar-start">
                         <div className="dropdown">
+                        <NavLink to='/'>
                             <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost btn-circle">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+                                <AiFillHome className="h-5 w-5"></AiFillHome>
                             </label>
-                            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 gap-1">
-                                <li><NavLink to='/'>Home</NavLink></li>
-                            </ul>
+                        </NavLink>
                         </div>
                         <Link to='/' className="ml-2 text-2xl md:hidden font-bold flex items-center normal-case"><GiLoincloth />eShop</Link>
                     </div>
@@ -155,7 +154,9 @@ const handelPurchase = () =>{
                                             <p>{userDetails?.email}</p>
                                         </div>
                                     </li>
+                                    <li><NavLink to='/dashboard'>Profile</NavLink></li>
                                     <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+                                    <li><NavLink to='/purchase'>Purchase Report</NavLink></li>
                                     <hr />
                                     <li><button onClick={handleLogOut} to='/'>Logout</button></li>
                                 </ul>
