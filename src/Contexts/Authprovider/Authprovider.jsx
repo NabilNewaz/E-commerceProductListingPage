@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -17,9 +18,10 @@ const Authprovider = ({ children }) => {
 
         if(localStorage.getItem('token')){
             setLoading(true);
-            axios.get(`https://fakestoreapi.com/users/${localStorage.getItem('userId')}`)
+            const decodedToken = jwt_decode(localStorage.getItem('token'));
+            axios.get(`https://fakestoreapi.com/users/${decodedToken.sub}`)
             .then(response => {
-            if(response.data.password === localStorage.getItem('password')){
+            if(response.data.password){
                 setUserDetails(response.data);
             }else{
                 userDetails([]);
@@ -35,7 +37,7 @@ const Authprovider = ({ children }) => {
       }, [user]);
       
       const Logout = () =>{
-        localStorage.clear();
+        localStorage.removeItem('token');
         setUser(null);
         setUserDetails([]);
         toast.success('Log Out Successfull')

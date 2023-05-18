@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Spinner from '../Shared/Spinner/Spinner';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { CartProvider, useCart } from "react-use-cart";
+import { AuthContext } from '../../Contexts/Authprovider/Authprovider';
 
 const Products = () => {
+    const { userDetails } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [limit, setLimit] = useState(8);
     const { addItem } = useCart();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products?limit=${limit}`)
@@ -30,8 +35,14 @@ const Products = () => {
       }
 
       const setToCart = (product) => {
-        addItem(product);
-        toast.success('Add Product to Cart Succefully');
+        if (userDetails?.id) {
+            addItem(product);
+            toast.success('Add Product to Cart Succefully');
+        }
+        else{
+            navigate('/login');
+            toast.error('You Are Not Logged In');
+        }
       }
 
     return (

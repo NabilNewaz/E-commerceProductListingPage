@@ -34,22 +34,10 @@ const Login = () => {
         })
         .then((response) => {
             localStorage.setItem('token', response.data.token);
-            axios.get(`https://fakestoreapi.com/users`)
-            .then(response => {
-                const userDetails = response.data.find(user => {
-                    return user.username == username && user.password == password;
-                 })
-                 localStorage.setItem('userId', userDetails.id);
-                 localStorage.setItem('password', userDetails.password);
-                 setLoading(true);
-                 setUser(true);
-                 toast.success('Successfully Logged In')
-                 navigate(from, { replace: true });
-            })
-            .catch(error => {
-                toast.error('API Not Working Properly');
-                console.log(error);
-            });
+            setLoading(true);
+            setUser(true);
+            toast.success('Successfully Logged In')
+            navigate(from, { replace: true });
         })
         .catch((error) => {
             toast.error('Wrong Username and Password');
