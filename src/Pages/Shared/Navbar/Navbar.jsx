@@ -12,21 +12,21 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
-    const { user, userDetails, Logout,loading } = useContext(AuthContext);
+    const { user, userDetails, Logout, loading } = useContext(AuthContext);
     const [apiLoading, isapiLoading] = useState(null);
     const location = useLocation();
     const handleLogOut = () => {
         Logout();
     }
 
-const {
-    isEmpty,
-    emptyCart,
-    totalUniqueItems,
-    items,
-    cartTotal,
-    updateItemQuantity,
-    removeItem,
+    const {
+        isEmpty,
+        emptyCart,
+        totalUniqueItems,
+        items,
+        cartTotal,
+        updateItemQuantity,
+        removeItem,
     } = useCart();
 
     const ScrollToTop = () => {
@@ -36,30 +36,30 @@ const {
         });
     };
 
-const handelPurchase = () =>{
-    const resultCart = items.map(obj => ({ productId: obj.id, quantity: obj.quantity }));
-    const current = new Date();
-    const date = `${current.getFullYear()}-${current.toLocaleDateString('en-US', {month: '2-digit'})}-${current.toLocaleDateString('en-US', {day: '2-digit'})}`;
-    axios.post('https://fakestoreapi.com/carts', {
+    const handelPurchase = () => {
+        const resultCart = items.map(obj => ({ productId: obj.id, quantity: obj.quantity }));
+        const current = new Date();
+        const date = `${current.getFullYear()}-${current.toLocaleDateString('en-US', { month: '2-digit' })}-${current.toLocaleDateString('en-US', { day: '2-digit' })}`;
+        axios.post('https://fakestoreapi.com/carts', {
             userId: userDetails.id,
             date: date,
-            products:resultCart 
+            products: resultCart
         }, {
             headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json'
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            isapiLoading(true);
-            emptyCart();
-            toast.success('Your Purchase Completed. Find Them in Purchse Report')
-            isapiLoading(false);
-        })
-        .catch((error) => {
-            toast.error('Your Purchase Not Completed');
-        });
-}
+            .then((response) => {
+                isapiLoading(true);
+                emptyCart();
+                toast.success('Your Purchase Completed. Find Them in Purchse Report')
+                isapiLoading(false);
+            })
+            .catch((error) => {
+                toast.error('Your Purchase Not Completed');
+            });
+    }
 
 
     return (
@@ -68,11 +68,11 @@ const handelPurchase = () =>{
                 <div className="navbar bg-base-100 md:px-10 px-2 lg:px-50">
                     <div className="navbar-start">
                         <div className="dropdown">
-                        <NavLink to='/'>
-                            <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost btn-circle">
-                                <AiFillHome className="h-5 w-5"></AiFillHome>
-                            </label>
-                        </NavLink>
+                            <NavLink to='/'>
+                                <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost btn-circle">
+                                    <AiFillHome className="h-5 w-5"></AiFillHome>
+                                </label>
+                            </NavLink>
                         </div>
                         <Link to='/' className="ml-2 text-2xl md:hidden font-bold flex items-center normal-case"><GiLoincloth />eShop</Link>
                     </div>
@@ -132,7 +132,7 @@ const handelPurchase = () =>{
                                                 <p className='font-semibold text-xl'>${cartTotal.toFixed(2)}</p>
                                             </div>
                                         </div>
-                                        <div onClick={()=> handelPurchase()} className={apiLoading ? 'btn mt-2 loading bg-gray-600 hover:bg-gray-700 text-white font-semibold text-xl' : 'btn mt-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold text-xl'}>
+                                        <div onClick={() => handelPurchase()} className={apiLoading ? 'btn mt-2 loading bg-gray-600 hover:bg-gray-700 text-white font-semibold text-xl' : 'btn mt-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold text-xl'}>
                                             <button className='mt-[-5px]'>Purchase Now</button>
                                         </div>
                                     </li>

@@ -5,15 +5,15 @@ import jwt_decode from "jwt-decode";
 import { toast } from 'react-hot-toast';
 
 const Dashboard = () => {
-    const[isAdmin, setIsAdmin] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(null)
     useEffect(() => {
-        if(localStorage.getItem('token')){
+        if (localStorage.getItem('token')) {
             const decodedToken = jwt_decode(localStorage.getItem('token'));
-            if(decodedToken.sub === 1){
+            if (decodedToken.sub === 1) {
                 setIsAdmin(true);
             }
         };
-      }, []);
+    }, []);
     const navigate = useNavigate();
 
     const navigateAdminRoute = () => {
@@ -24,9 +24,9 @@ const Dashboard = () => {
     }
     useEffect(() => {
         const timer = setTimeout(() => {
-            if(isAdmin){
+            if (isAdmin) {
                 navigateAdminRoute();
-            }else{
+            } else {
                 navigateNotAdmin();
                 toast.error('You Are Not Admin')
             }
