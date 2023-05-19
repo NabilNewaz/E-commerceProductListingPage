@@ -6,6 +6,7 @@ import LoginCheck from "./LoginCheck";
 import Notfound from "../Pages/Notfound/Notfound";
 import Profile from "../Pages/Profile/Profile";
 import Privateroute from "./PrivateRoute";
+import Purchase from "../Pages/Purchase/Purchase";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         {
           path: '/profile',
           element: <Privateroute><Profile></Profile></Privateroute>
+        },
+        {
+          path: '/purchase/history',
+          element: <Privateroute><Purchase></Purchase></Privateroute>
         },
         {
           path: "*",

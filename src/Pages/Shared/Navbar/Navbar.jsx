@@ -156,7 +156,7 @@ const handelPurchase = () =>{
                                     </li>
                                     <li><NavLink to='/profile'>Profile</NavLink></li>
                                     <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-                                    <li><NavLink to='/purchase'>Purchase Report</NavLink></li>
+                                    <li><NavLink to='/purchase/history'>Purchase Report</NavLink></li>
                                     <hr />
                                     <li><button onClick={handleLogOut} to='/'>Logout</button></li>
                                 </ul>
