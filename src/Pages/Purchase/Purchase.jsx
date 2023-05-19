@@ -6,41 +6,41 @@ import { toast } from 'react-hot-toast';
 import ItemComponent from './ItemComponent';
 
 const Purchase = () => {
-    const[isLoading, setIsLoading] = useState(true);
-    const[purchaseProduct, setPurchaseProduct] = useState([]);
-    const[totalPrice, setTotalPrice] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [purchaseProduct, setPurchaseProduct] = useState([]);
+    const [totalPrice, setTotalPrice] = useState([]);
     const totalCostArr = [];
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/carts/user/${jwt_decode(localStorage.getItem('token')).sub}`)
-          .then(response => {
-            setPurchaseProduct(response.data)
-            if(response.data.length <= 0){
-                setIsLoading(false);
-            }
-          })
-          .catch(error => {
-            toast.error('API Not Working Properly');
-            console.log(error);
-          });
-      }, []);
+            .then(response => {
+                setPurchaseProduct(response.data)
+                if (response.data.length <= 0) {
+                    setIsLoading(false);
+                }
+            })
+            .catch(error => {
+                toast.error('API Not Working Properly');
+                console.log(error);
+            });
+    }, []);
 
-      let totalDoc = document.getElementsByClassName("totalPrice");
-        if(totalDoc){
-            for(let i = 0 ; i <= totalDoc.length; i++){
-                let totalCost = 0;
-                    for(let j = 0 ; j <= totalDoc[1]?.childNodes?.length; j++){
-                        if(parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) && parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) != '0'){
-                            totalCost = totalCost + parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML);
-                        }
-                    }
-                    totalCostArr.push(totalCost);
+    let totalDoc = document.getElementsByClassName("totalPrice");
+    if (totalDoc) {
+        for (let i = 0; i <= totalDoc.length; i++) {
+            let totalCost = 0;
+            for (let j = 0; j <= totalDoc[1]?.childNodes?.length; j++) {
+                if (parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) && parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) != '0') {
+                    totalCost = totalCost + parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML);
+                }
             }
+            totalCostArr.push(totalCost);
         }
+    }
 
-        useEffect(() => {
-            setTotalPrice(totalCostArr)
-          }, [isLoading]);
+    useEffect(() => {
+        setTotalPrice(totalCostArr)
+    }, [isLoading]);
 
     return (
         <div className='px-2'>
@@ -60,17 +60,17 @@ const Purchase = () => {
                     <div key={perPurchase.id}>
                         <div className="badge badge-lg text-xl font-semibold mt-4 pb-1">{perPurchase.date.substring(0, 10)}</div>
                         <div className='totalPrice'>
-                        {
-                            perPurchase?.products.map( product => 
-                                <ItemComponent key={product.productId} product={product} setIsLoading={setIsLoading} totalPrice={totalPrice} setTotalPrice={setTotalPrice}></ItemComponent>
-                            )
-                        }
+                            {
+                                perPurchase?.products.map(product =>
+                                    <ItemComponent key={product.productId} product={product} setIsLoading={setIsLoading} totalPrice={totalPrice} setTotalPrice={setTotalPrice}></ItemComponent>
+                                )
+                            }
                             <div className='bg-base-200 rounded-xl mt-1 flex justify-between px-8 py-5'>
                                 <p className='text-xl font-bold'>Total Price</p>
                                 <p className='text-xl font-bold'>${totalPrice[index]}</p>
                             </div>
                         </div>
-                    </div>     
+                    </div>
                 )}
             </div>
         </div>

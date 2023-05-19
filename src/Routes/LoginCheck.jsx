@@ -4,8 +4,8 @@ import Spinner from '../Pages/Shared/Spinner/Spinner';
 import { AuthContext } from '../Contexts/Authprovider/Authprovider';
 import { toast } from 'react-hot-toast';
 
-const LoginCheck = ({children}) => {
-    
+const LoginCheck = ({ children }) => {
+
     const { userDetails, loading } = useContext(AuthContext);
     const location = useLocation();
 

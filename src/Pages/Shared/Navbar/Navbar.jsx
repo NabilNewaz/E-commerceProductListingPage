@@ -40,10 +40,10 @@ const Navbar = () => {
 
     const handeleSearch = () => {
         let searchKeyword = document.getElementById('searchField').value;
-        if(!searchKeyword){
+        if (!searchKeyword) {
             toast.error('Please Enter Any Search Keyword')
-        } 
-        else{
+        }
+        else {
             navigate(`/search/${searchKeyword}`);
             toast.success('You Search Results');
         }

@@ -12,10 +12,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Authprovider>
       <HelmetProvider>
         <Toaster />
-          <CartProvider>
-              <App />
-          </CartProvider>
-        </HelmetProvider>
-      </Authprovider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </HelmetProvider>
+    </Authprovider>
   </React.StrictMode>,
 )

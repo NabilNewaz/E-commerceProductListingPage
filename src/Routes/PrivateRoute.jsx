@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import Spinner from '../Pages/Shared/Spinner/Spinner';
 import { AuthContext } from '../Contexts/Authprovider/Authprovider';
 
-const Privateroute = ({children}) => {
+const Privateroute = ({ children }) => {
 
     const { loading } = useContext(AuthContext);
     const location = useLocation();
@@ -16,7 +16,7 @@ const Privateroute = ({children}) => {
 
     if (!localStorage.getItem('token')) {
         return <Navigate to="/login" state={{ from: location }} replace></Navigate>
-    } 
+    }
 
     return children;
 };

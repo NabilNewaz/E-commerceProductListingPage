@@ -5,15 +5,15 @@ import Footer from '../Pages/Shared/Footer/Footer';
 import jwt_decode from "jwt-decode";
 
 const DashboardLayout = () => {
-    const[isAdmin, setIsAdmin] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(null)
     useEffect(() => {
-        if(localStorage.getItem('token')){
+        if (localStorage.getItem('token')) {
             const decodedToken = jwt_decode(localStorage.getItem('token'));
-            if(decodedToken.sub === 1){
+            if (decodedToken.sub === 1) {
                 setIsAdmin(true);
             }
         };
-      }, []);
+    }, []);
     return (
         <div>
             <Navbar></Navbar>
@@ -35,7 +35,7 @@ const DashboardLayout = () => {
                 </div>
             </div>
             <div className='md:px-10 px-0 lg:px-50'>
-            <Footer></Footer>
+                <Footer></Footer>
             </div>
         </div>
     );

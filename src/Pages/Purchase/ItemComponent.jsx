@@ -2,30 +2,21 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-const ItemComponent = ({product, setIsLoading, totalPrice, setTotalPrice}) => {
-    const[productDetails, setProductDetails] = useState();
+const ItemComponent = ({ product, setIsLoading }) => {
+    const [productDetails, setProductDetails] = useState();
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/${product.productId}`)
-          .then(response => {
-            if(response.data){
-                setProductDetails(response.data)
-                setTimeout(function() { setIsLoading(false); }, 500)
-            }
-          })
-          .catch(error => {
-            toast.error('API Not Working Properly');
-            console.log(error);
-          });
-      }, [product]);
-
-    //   useEffect(() => {
-    //     const price = parseFloat(productDetails?.price) * parseFloat(product.quantity);
-    //     if(price !== NaN){
-    //         setTotalPrice(totalPrice + price)
-    //         console.log(price)
-    //     }
-    //   }, [productDetails])
-
+            .then(response => {
+                if (response.data) {
+                    setProductDetails(response.data)
+                    setTimeout(function () { setIsLoading(false); }, 500)
+                }
+            })
+            .catch(error => {
+                toast.error('API Not Working Properly');
+                console.log(error);
+            });
+    }, [product]);
 
     return (
         <div className='flex flex-col md:flex-row bg-base-200 text-black justify-between rounded-xl px-8 py-3 mt-1'>
@@ -46,7 +37,7 @@ const ItemComponent = ({product, setIsLoading, totalPrice, setTotalPrice}) => {
                 </div>
                 <div className='flex'>
                     <span className='font-semibold text-xl'>$</span>
-                    <p className='font-semibold text-xl'>{(parseFloat(productDetails?.price)*parseFloat(product.quantity)).toFixed(2)}</p>
+                    <p className='font-semibold text-xl'>{(parseFloat(productDetails?.price) * parseFloat(product.quantity)).toFixed(2)}</p>
                 </div>
             </div>
         </div>
