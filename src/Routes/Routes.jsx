@@ -13,6 +13,7 @@ import AllProducts from "../Pages/Dashboard/AllProducts";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import Signup from "../Pages/Signup/Signup";
 import CategoryWiseProducts from "../Pages/CategoryWiseProducts/CategoryWiseProducts";
+import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: '/category/:id',
         loader: ({ params }) => fetch(`https://fakestoreapi.com/products/category/${params.id}`),
         element: <CategoryWiseProducts></CategoryWiseProducts>
+      },
+      {
+        path: '/product/:id',
+        element: <ProductDetails></ProductDetails>
       },
       {
         path: "*",
