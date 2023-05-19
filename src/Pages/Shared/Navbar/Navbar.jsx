@@ -58,7 +58,7 @@ const handelPurchase = () =>{
     return (
         <div className='sticky top-0 z-50'>
             <Sticky>
-                <div className="navbar bg-base-100">
+                <div className="navbar bg-base-100 md:px-10 px-2 lg:px-50">
                     <div className="navbar-start">
                         <div className="dropdown">
                         <NavLink to='/'>
@@ -77,7 +77,7 @@ const handelPurchase = () =>{
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
                         <div className={userDetails?.id ? 'block' : 'hidden'}>
-                            <div className="dropdown dropdown-end">
+                            <div className={(location.pathname.slice(1, 10) === 'dashboard') ? 'hidden' : 'block dropdown dropdown-end'}>
                                 <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost mr-1 btn-circle md:flex"><div className={isEmpty ? 'hidden' : 'badge absolute top-[-5px] right-[-2px]'}>{totalUniqueItems}</div><AiOutlineShoppingCart className="h-5 w-5"></AiOutlineShoppingCart></label>
                                 <ul tabIndex={0} className="dropdown-content grid overflow-x-hidden menu mt-3 p-2 shadow max-h-[80vh] w-69 bg-base-100 rounded-box gap-1">
                                     {items.map((item) => (
@@ -135,7 +135,7 @@ const handelPurchase = () =>{
                         <div className={loading ? 'block' : 'hidden'}>
                             <Spinner></Spinner>
                         </div>
-                        <div className={loading ? 'hidden' : 'block'}>
+                        <div className={loading ? 'hidden' : 'flex'}>
                             <div className={(location.pathname.slice(1, 10) === 'dashboard') ? 'block lg:hidden' : 'hidden'}>
                                 <label htmlFor="dashboard-drawer" className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost mr-1 btn-circle">
                                     <RiMenuUnfoldFill className='text-2xl' />

@@ -43,12 +43,12 @@ const Purchase = () => {
           }, [isLoading]);
 
     return (
-        <div className='px-2 mt-8'>
+        <div className='px-2'>
             <div className={purchaseProduct?.length <= 0 ? 'hidden' : 'block margin-x-auto mt-8 mb-1'}>
                 <h1 className='text-3xl uppercase font-bold'>Purchase History</h1>
                 <p className='text-md'>Find Your All Product Purchase From Here</p>
             </div>
-            <div className={isLoading ? 'block text-center' : 'hidden'}>
+            <div className={isLoading ? 'block text-center mt-10' : 'hidden'}>
                 <Spinner></Spinner>
             </div>
             <div className={purchaseProduct?.length <= 0 && !isLoading ? 'block' : 'hidden'}>

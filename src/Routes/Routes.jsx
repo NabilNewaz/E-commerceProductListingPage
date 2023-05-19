@@ -7,6 +7,10 @@ import Notfound from "../Pages/Notfound/Notfound";
 import Profile from "../Pages/Profile/Profile";
 import Privateroute from "./PrivateRoute";
 import Purchase from "../Pages/Purchase/Purchase";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import AllProducts from "../Pages/Dashboard/AllProducts";
+import AddProduct from "../Pages/Dashboard/AddProduct";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +39,24 @@ const router = createBrowserRouter([
         }
       ],
     },
+    {
+      path: '/dashboard',
+      element: <Privateroute><DashboardLayout></DashboardLayout></Privateroute>,
+      children: [
+          {
+              path: '/dashboard',
+              element: <Dashboard></Dashboard>
+          },
+          {
+              path: '/dashboard/all-products',
+              element: <AllProducts></AllProducts>
+          },
+          {
+              path: '/dashboard/add-product',
+              element: <AddProduct></AddProduct>
+          }
+      ]
+    }
   ])
 
   export default router;

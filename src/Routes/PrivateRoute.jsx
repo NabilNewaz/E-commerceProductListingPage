@@ -9,7 +9,7 @@ const Privateroute = ({children}) => {
     const location = useLocation();
 
     if (loading) {
-        return <div className="text-center">
+        return <div className="text-center mt-10">
             <Spinner />
         </div>
     }

@@ -42,7 +42,7 @@ const ItemComponent = ({product, setIsLoading, totalPrice, setTotalPrice}) => {
             </div>
             <div className='flex justify-between gap-3 items-center mt-2 md:mt-0'>
                 <div className="form-control">
-                    <p className='text-xl'>{productDetails?.price} x {product.quantity}</p>
+                    <p className='text-xl'>${productDetails?.price} x {product.quantity}</p>
                 </div>
                 <div className='flex'>
                     <span className='font-semibold text-xl'>$</span>
