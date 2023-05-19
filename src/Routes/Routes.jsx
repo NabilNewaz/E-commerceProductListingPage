@@ -14,6 +14,7 @@ import AddProduct from "../Pages/Dashboard/AddProduct";
 import Signup from "../Pages/Signup/Signup";
 import CategoryWiseProducts from "../Pages/CategoryWiseProducts/CategoryWiseProducts";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import SearchResult from "../Pages/SearchResult/SearchResult";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: '/product/:id',
         element: <ProductDetails></ProductDetails>
+      },
+      {
+        path: '/search/:keyword',
+        element: <SearchResult></SearchResult>
       },
       {
         path: "*",
