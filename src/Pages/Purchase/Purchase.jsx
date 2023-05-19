@@ -52,7 +52,7 @@ const Purchase = () => {
                 <Spinner></Spinner>
             </div>
             <div className={purchaseProduct?.length <= 0 && !isLoading ? 'block' : 'hidden'}>
-                <p className='text-slate-400 flex justify-center text-xl font-bold'>No Purchase History</p>
+                <p className='text-slate-400 flex justify-center my-20 md:my-0 text-xl font-bold'>No Purchase History</p>
             </div>
 
             <div className='h-full'>

@@ -3,10 +3,14 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
 
 const AddProduct = () => {
     const[isAdmin, setIsAdmin] = useState(null);
+    const[isLoading, setIsLoading] = useState(null);
     const[catagorisName, setCatagorisName] = useState([]);
+
+    const imageHostKey = import.meta.env.VITE_REACT_APP_imgbb_Key;
 
     useEffect(() => {
         if(localStorage.getItem('token')){
@@ -31,9 +35,27 @@ const AddProduct = () => {
         return () => clearTimeout(timer);
     });
 
+    useEffect(() => {
+        axios.get(`https://fakestoreapi.com/products/categories`)
+          .then(response => {
+            setCatagorisName(response.data)
+          })
+          .catch(error => {
+            toast.error('API Not Working Properly');
+            console.log(error);
+          });
+      }, []);;
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
+
+        setIsLoading(true);
+
+        const producttitle = form.productTitle.value;
+        const productprice = form.productPrice.value;
+        const productcategory = form.productCategory.value;
+        const description = form.description.value;
 
         const formData = new FormData()
         const image = form.productImage.files[0]
@@ -46,45 +68,25 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(imagedata => {
                 if (imagedata.success) {
-                    const productname = form.productName.value;
-                    const productprice = form.productPrice.value;
-                    const productoriginalprice = form.productoriginalPrice.value;
-                    const productcondition = form.productCondition.value;
-                    const usetime = form.useTime.value;
-                    const mobilenumber = form.mobileNumber.value;
-                    const location = form.location.value;
-                    const productcategory = form.productCategory.value;
-                    const description = form.description.value;
-
-                    axios.post(`https://b612-used-products-resale-server-side-nabil-newaz.vercel.app/add-product`, {
-                        "product_category": productcategory,
-                        "product_name": productname,
-                        "product_img": imagedata.data.url,
-                        "product_resellPrice": productprice,
-                        "product_originalPrice": productoriginalprice,
-                        "product_condition": productcondition,
-                        "product_useTime": usetime,
-                        "product_mobilenumber": mobilenumber,
-                        "product_location": location,
-                        "product_description": description,
-                        "product_sellerID": user.uid,
-                        "product_postTime": new Date().getTime(),
-                        "isAdvertised": false,
-                        "isBooked": false
-                    },
-                        {
+                    axios.post('https://fakestoreapi.com/products', {
+                        title: producttitle,
+                        price: productprice,
+                        description: description,
+                        image: imagedata.data.url,
+                        category: productcategory
+                        }, {
                             headers: {
-                                authorization: `Bearer ${localStorage.getItem('token')}`
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'application/json'
                             }
-                        }
-                    )
-                        .then(function () {
-                            form.reset();
-                            navigate('/dashboard/my-products');
-                            toast.success('Product Added Successfully')
                         })
-                        .catch(function () {
-                            toast.error('Something Went Wrong')
+                        .then((response) => {
+                            toast.success('Your Product Added Successfully')
+                            form.reset();
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error('Something Wrong');
                         });
                 }
 
@@ -109,21 +111,21 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text font-semibold">Product Title</span>
                         </label>
-                        <input name='productName' type="productName" required placeholder="Enter Product Name" className="input input-bordered w-full" />
+                        <input name='productTitle' type="productTitle" required placeholder="Enter Product Name" className="input input-bordered w-full" />
                     </div>
                     <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text font-semibold">Product Selling Price</span>
                         </label>
-                        <input name='productPrice' type="productPrice" required placeholder="Enter Product Selling Price" className="input input-bordered w-full" />
+                        <input name='productPrice' type="number" step="0.01" required placeholder="Enter Product Selling Price" className="input input-bordered w-full" />
                     </div>
                     <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text font-semibold">Product Category</span>
                         </label>
-                        <select required id="productCategory" name='productCategory' className="select select-bordered">
-                            {catagorisName.map(catagoryName =>
-                                <option value={catagoryName._id}>{catagoryName.category_name}</option>
+                        <select required id="productCategory" name='productCategory' className="select select-bordered capitalize">
+                            {catagorisName.map((catagoryName, index) =>
+                                <option key={index} value={catagoryName}>{catagoryName}</option>
                             )}
                         </select>
                     </div>
@@ -144,7 +146,7 @@ const AddProduct = () => {
                 </div>
             </div>
             <div className='mt-3'>
-                <button type="submit" className="btn w-full  bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost">Submit</button>
+                <button type="submit" className={isLoading ? 'btn w-full loading bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost' : 'btn w-full bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost'}>Add Product</button>
             </div>
         </form>
     </div>

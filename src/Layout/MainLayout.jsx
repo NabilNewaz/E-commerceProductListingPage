@@ -10,8 +10,10 @@ const MainLayout = () => {
             <div>
                 <Navbar></Navbar>
             </div>
-            <div className='md:px-10 px-0 lg:px-50 flex flex-col h-screen justify-between'>
+            <div className='md:px-10 px-0 lg:px-50'>
                 <Outlet></Outlet>
+            </div>
+            <div className='md:px-10 px-0 lg:px-50'>
                 <Footer></Footer>
             </div>
         </div>

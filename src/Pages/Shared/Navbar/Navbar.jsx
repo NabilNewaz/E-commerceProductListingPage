@@ -29,6 +29,13 @@ const {
     removeItem,
     } = useCart();
 
+    const ScrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
 const handelPurchase = () =>{
     const resultCart = items.map(obj => ({ productId: obj.id, quantity: obj.quantity }));
     const current = new Date();
@@ -154,9 +161,9 @@ const handelPurchase = () =>{
                                             <p>{userDetails?.email}</p>
                                         </div>
                                     </li>
-                                    <li><NavLink to='/profile'>Profile</NavLink></li>
-                                    <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-                                    <li><NavLink to='/purchase/history'>Purchase Report</NavLink></li>
+                                    <li onClick={ScrollToTop}><NavLink to='/profile'>Profile</NavLink></li>
+                                    <li onClick={ScrollToTop} className={userDetails.id == 1 ? 'block' : 'hidden'}><NavLink to='/dashboard'>Dashboard</NavLink></li>
+                                    <li onClick={ScrollToTop}><NavLink to='/purchase/history'>Purchase Report</NavLink></li>
                                     <hr />
                                     <li><button onClick={handleLogOut} to='/'>Logout</button></li>
                                 </ul>
