@@ -61,7 +61,7 @@ const SearchResult = () => {
             <div className={isLoading ? 'block' : 'hidden'}>
                 <Spinner></Spinner>
             </div>
-            <div className={searchResult?.length <= 0 ? 'block' : 'hidden'}>
+            <div className={searchResult?.length <= 0 && !isLoading ? 'block' : 'hidden'}>
                 <p className='text-slate-400 flex justify-center md:my-0 text-xl font-bold'>No item Found</p>
                 <div className="form-control">
                     <div className="input-group flex justify-center mt-5">
