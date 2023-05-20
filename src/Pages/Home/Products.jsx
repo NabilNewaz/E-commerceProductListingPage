@@ -8,36 +8,20 @@ import { AuthContext } from '../../Contexts/Authprovider/Authprovider';
 
 const Products = () => {
     const { userDetails } = useContext(AuthContext);
+
     const [allproducts, setAllProducts] = useState([]);
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [shortOrder, setShortOrder] = useState('');
+
     const { addItem } = useCart();
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState(1);
+    const myRef = useRef(null);
+
     const itemsPerPage = 4;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const [shortOrder, setShortOrder] = useState('');
-
-    const myRef = useRef(null);
-    const executeScroll = () => myRef.current.scrollIntoView()
-
-    const handlePageClick = (event) => {
-        setCurrentPage(Number(event.target.id));
-        executeScroll();
-    };
-
-    const ScrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
-
-    const shortProduct = () => {
-        let shortKeyword = document.getElementById('shortField').value;
-        setShortOrder(shortKeyword)
-    }
 
     useEffect(() => {
         setIsLoading(true);
@@ -56,8 +40,26 @@ const Products = () => {
 
     useEffect(() => {
         setProducts(allproducts.slice(indexOfFirstItem, indexOfLastItem));
-
     }, [indexOfLastItem, indexOfFirstItem]);
+
+    const executeScroll = () => myRef.current.scrollIntoView()
+
+    const handlePageClick = (event) => {
+        setCurrentPage(Number(event.target.id));
+        executeScroll();
+    };
+
+    const ScrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
+    const shortProduct = () => {
+        let shortKeyword = document.getElementById('shortField').value;
+        setShortOrder(shortKeyword)
+    }
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(allproducts.length / itemsPerPage); i++) {
@@ -104,7 +106,7 @@ const Products = () => {
                         <div key={product.id} className="col-span-1 flex flex-col bg-white border-2 p-4 rounded-lg justify-between dark:bg-[#2a303c] dark:border-gray-400">
                             <Link onClick={ScrollToTop} to={`/product/${product.id}`}>
                                 <div>
-                                    <div className="bg-white rounded-lg overflow-hidden h-80 w-auto">
+                                    <div className="bg-white rounded-lg overflow-hidden h-96 w-auto">
                                         <img src={product.image} alt="Your Image" className="h-full w-full" />
                                     </div>
                                     <h2 className="mb-2 mt-4 font-bold text-xl">

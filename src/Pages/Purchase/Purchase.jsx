@@ -9,6 +9,7 @@ const Purchase = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [purchaseProduct, setPurchaseProduct] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
+    
     const totalCostArr = [];
 
     useEffect(() => {

@@ -5,7 +5,6 @@ import Home from "../Pages/Home/Home";
 import LoginCheck from "./LoginCheck";
 import Notfound from "../Pages/Notfound/Notfound";
 import Profile from "../Pages/Profile/Profile";
-import Privateroute from "./PrivateRoute";
 import Purchase from "../Pages/Purchase/Purchase";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Dashboard from "../Pages/Dashboard/Dashboard";
@@ -15,6 +14,7 @@ import Signup from "../Pages/Signup/Signup";
 import CategoryWiseProducts from "../Pages/CategoryWiseProducts/CategoryWiseProducts";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import SearchResult from "../Pages/SearchResult/SearchResult";
+import Privateroute from "./Privateroute";
 
 const router = createBrowserRouter([
   {

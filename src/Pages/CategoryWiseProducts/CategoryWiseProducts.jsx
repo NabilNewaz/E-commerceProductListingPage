@@ -9,11 +9,14 @@ import Spinner from '../Shared/Spinner/Spinner';
 const CategoryWiseProducts = () => {
     const { userDetails } = useContext(AuthContext);
     const catId = useParams();
+
     const [catProducts, srtaCatProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
     const { addItem } = useCart();
     const navigate = useNavigate();
     const location = useLocation();
+
     const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
@@ -46,6 +49,7 @@ const CategoryWiseProducts = () => {
             toast.error('You Are Not Logged In');
         }
     }
+    
     return (
         <div className='mt-5 px-2'>
             <div className={isLoading ? 'block' : 'hidden'}>
@@ -59,7 +63,7 @@ const CategoryWiseProducts = () => {
                     <div key={product.id} className="col-span-1 flex flex-col bg-white border-2 p-4 rounded-lg justify-between">
                         <Link onClick={ScrollToTop} to={`/product/${product.id}`}>
                             <div>
-                                <div className="bg-white rounded-lg overflow-hidden h-80 w-auto">
+                                <div className="bg-white rounded-lg overflow-hidden h-96 w-auto">
                                     <img src={product.image} alt="Your Image" className="h-full w-full" />
                                 </div>
                                 <h2 className="mb-2 mt-4 font-bold text-xl">

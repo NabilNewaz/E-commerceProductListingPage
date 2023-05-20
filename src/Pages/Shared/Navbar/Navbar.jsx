@@ -13,7 +13,9 @@ import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
     const { user, userDetails, Logout, loading } = useContext(AuthContext);
+
     const [apiLoading, isapiLoading] = useState(null);
+    
     const location = useLocation();
     const navigate = useNavigate();
 

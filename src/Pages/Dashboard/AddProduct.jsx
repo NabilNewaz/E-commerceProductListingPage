@@ -10,6 +10,7 @@ const AddProduct = () => {
     const [isLoading, setIsLoading] = useState(null);
     const [catagorisName, setCatagorisName] = useState([]);
 
+    const navigate = useNavigate();
     const imageHostKey = import.meta.env.VITE_REACT_APP_imgbb_Key;
 
     useEffect(() => {
@@ -20,11 +21,7 @@ const AddProduct = () => {
             }
         };
     }, []);
-    const navigate = useNavigate();
 
-    const navigateNotAdmin = () => {
-        navigate('/')
-    }
     useEffect(() => {
         const timer = setTimeout(() => {
             if (!isAdmin) {
@@ -45,6 +42,10 @@ const AddProduct = () => {
                 console.log(error);
             });
     }, []);;
+
+    const navigateNotAdmin = () => {
+        navigate('/')
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();

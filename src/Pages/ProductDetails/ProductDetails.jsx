@@ -10,21 +10,12 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 const ProductDetails = () => {
     const proId = useParams();
     const { userDetails } = useContext(AuthContext);
+
     const [isLoading, setIsLoading] = useState(null);
     const [product, setProducts] = useState(null);
+
     const { addItem } = useCart();
     const navigate = useNavigate();
-
-    const setToCart = (pro) => {
-        if (userDetails?.id) {
-            addItem(pro);
-            toast.success('Add Product to Cart Succefully');
-        }
-        else {
-            navigate('/login');
-            toast.error('You Are Not Logged In');
-        }
-    }
 
     useEffect(() => {
         setIsLoading(true);
@@ -39,6 +30,17 @@ const ProductDetails = () => {
                 setIsLoading(false);
             });
     }, [proId]);
+    
+    const setToCart = (pro) => {
+        if (userDetails?.id) {
+            addItem(pro);
+            toast.success('Add Product to Cart Succefully');
+        }
+        else {
+            navigate('/login');
+            toast.error('You Are Not Logged In');
+        }
+    }
 
     return (
         <PhotoProvider>

@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 
 const DashboardLayout = () => {
     const [isAdmin, setIsAdmin] = useState(null)
+
     useEffect(() => {
         if (localStorage.getItem('token')) {
             const decodedToken = jwt_decode(localStorage.getItem('token'));
@@ -14,6 +15,7 @@ const DashboardLayout = () => {
             }
         };
     }, []);
+
     return (
         <div>
             <Navbar></Navbar>

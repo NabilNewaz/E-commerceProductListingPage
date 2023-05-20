@@ -16,17 +16,10 @@ const AllProducts = () => {
     const [catagorisName, setCatagorisName] = useState([]);
     const [selectedValue, setSelectedValue] = useState();
 
+    const navigate = useNavigate();
     const imageHostKey = import.meta.env.VITE_REACT_APP_imgbb_Key;
 
     let closeDeleteModalBtn = document.getElementById('delete-modal-close');
-    const closeDeleteModal = () => {
-        closeDeleteModalBtn.click();
-    }
-
-    let closeEditModalBtn = document.getElementById('edit-modal-close');
-    const closeEditModal = () => {
-        closeEditModalBtn.click();
-    }
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -36,11 +29,7 @@ const AllProducts = () => {
             }
         };
     }, []);
-    const navigate = useNavigate();
 
-    const navigateNotAdmin = () => {
-        navigate('/')
-    }
     useEffect(() => {
         const timer = setTimeout(() => {
             if (!isAdmin) {
@@ -50,7 +39,6 @@ const AllProducts = () => {
         }, 50);
         return () => clearTimeout(timer);
     });
-
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products`)
@@ -63,18 +51,7 @@ const AllProducts = () => {
                 console.log(error);
                 setIsLoading(false);
             });
-    }, []);;
-
-    const handleProductDelete = (productID) => {
-        axios.delete(`https://fakestoreapi.com/products/${productID}`)
-            .then(function () {
-                closeDeleteModal();
-                toast.success('Product Deleted')
-            })
-            .catch(function () {
-                toast.error('Something Went Wrong')
-            });
-    }
+    }, []);
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/categories`)
@@ -86,6 +63,25 @@ const AllProducts = () => {
                 console.log(error);
             });
     }, []);
+
+    const navigateNotAdmin = () => {
+        navigate('/')
+    }
+
+    const closeDeleteModal = () => {
+        closeDeleteModalBtn.click();
+    }
+
+    const handleProductDelete = (productID) => {
+        axios.delete(`https://fakestoreapi.com/products/${productID}`)
+            .then(function () {
+                closeDeleteModal();
+                toast.success('Product Deleted')
+            })
+            .catch(function () {
+                toast.error('Something Went Wrong')
+            });
+    }
 
     function handleChange(event) {
         setSelectedValue(event.target.value);

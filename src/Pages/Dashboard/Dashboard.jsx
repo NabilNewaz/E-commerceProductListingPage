@@ -6,6 +6,9 @@ import { toast } from 'react-hot-toast';
 
 const Dashboard = () => {
     const [isAdmin, setIsAdmin] = useState(null)
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (localStorage.getItem('token')) {
             const decodedToken = jwt_decode(localStorage.getItem('token'));
@@ -14,14 +17,7 @@ const Dashboard = () => {
             }
         };
     }, []);
-    const navigate = useNavigate();
 
-    const navigateAdminRoute = () => {
-        navigate('/dashboard/all-products')
-    }
-    const navigateNotAdmin = () => {
-        navigate('/')
-    }
     useEffect(() => {
         const timer = setTimeout(() => {
             if (isAdmin) {
@@ -33,6 +29,15 @@ const Dashboard = () => {
         }, 50);
         return () => clearTimeout(timer);
     });
+
+    const navigateAdminRoute = () => {
+        navigate('/dashboard/all-products')
+    }
+
+    const navigateNotAdmin = () => {
+        navigate('/')
+    }
+
     <div>
         <Helmet>
             <title>Dashboard - eShop</title>

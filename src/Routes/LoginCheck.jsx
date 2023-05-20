@@ -5,8 +5,8 @@ import { AuthContext } from '../Contexts/Authprovider/Authprovider';
 import { toast } from 'react-hot-toast';
 
 const LoginCheck = ({ children }) => {
-
     const { userDetails, loading } = useContext(AuthContext);
+
     const location = useLocation();
 
     if (loading) {

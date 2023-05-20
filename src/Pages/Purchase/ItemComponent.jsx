@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 
 const ItemComponent = ({ product, setIsLoading }) => {
     const [productDetails, setProductDetails] = useState();
+    
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/${product.productId}`)
             .then(response => {

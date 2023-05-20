@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Signup = () => {
     const [checked, setChecked] = useState(false);
     const [isLoading, setIsLoading] = useState(null);
+
     const navigate = useNavigate();
 
     const handleSubmit = event => {

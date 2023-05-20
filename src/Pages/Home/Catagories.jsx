@@ -7,13 +7,6 @@ const Catagories = () => {
     const [categories, setCatagories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const ScrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
-
     useEffect(() => {
         axios.get('https://fakestoreapi.com/products/categories')
             .then(response => {
@@ -26,6 +19,13 @@ const Catagories = () => {
                 setIsLoading(false);
             });
     }, []);
+
+    const ScrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
 
     return (
         <div className='px-2 mt-8 mx-auto'>

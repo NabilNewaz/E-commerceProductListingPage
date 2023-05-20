@@ -8,9 +8,11 @@ import { useCart } from 'react-use-cart';
 
 const SearchResult = () => {
     const searchKeyword = useParams();
+    const { userDetails } = useContext(AuthContext);
+
     const [isLoading, setIsLoading] = useState(true);
     const [searchResult, setSearchResult] = useState([]);
-    const { userDetails } = useContext(AuthContext);
+
     const { addItem } = useCart();
     const navigate = useNavigate();
 
@@ -85,7 +87,7 @@ const SearchResult = () => {
                         <div key={product.id} className="col-span-1 flex flex-col bg-white border-2 p-4 rounded-lg justify-between">
                             <Link onClick={ScrollToTop} to={`/product/${product.id}`}>
                                 <div>
-                                    <div className="bg-white rounded-lg overflow-hidden h-80 w-auto">
+                                    <div className="bg-white rounded-lg overflow-hidden h-96 w-auto">
                                         <img src={product.image} alt="Your Image" className="h-full w-full" />
                                     </div>
                                     <h2 className="mb-2 mt-4 font-bold text-xl">
