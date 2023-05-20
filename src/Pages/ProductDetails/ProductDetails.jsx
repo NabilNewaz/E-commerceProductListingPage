@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../Shared/Spinner/Spinner';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useCart } from 'react-use-cart';
+import { AuthContext } from '../../Contexts/Authprovider/Authprovider';
 
 const ProductDetails = () => {
     const proId = useParams();
+    const { userDetails } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(null);
     const [product, setProducts] = useState(null);
     const { addItem } = useCart();
+    const navigate = useNavigate();
 
     const setToCart = (pro) => {
-        if (product?.id) {
+        if (userDetails?.id) {
             addItem(pro);
             toast.success('Add Product to Cart Succefully');
         }

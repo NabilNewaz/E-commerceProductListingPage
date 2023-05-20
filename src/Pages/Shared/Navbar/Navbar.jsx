@@ -81,7 +81,7 @@ const Navbar = () => {
                 <div className="navbar bg-base-100 md:px-10 px-2 lg:px-50">
                     <div className="navbar-start">
                         <div className="dropdown">
-                            <NavLink to='/'>
+                            <NavLink onClick={ScrollToTop} to='/'>
                                 <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost btn-circle">
                                     <AiFillHome className="h-5 w-5"></AiFillHome>
                                 </label>
@@ -94,14 +94,14 @@ const Navbar = () => {
                     </div>
                     <div className="navbar-end">
 
-                        <div className="dropdown dropdown-end">
+                        <div className={userDetails.id ? 'dropdown flex justify-center md:block md:dropdown-end' : 'hidden md:block md:dropdown-end md:dropdown'}>
                             <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost mr-1 btn-circle md:flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                             </label>
-                            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
+                            <ul tabIndex={0} className="dropdown-content mt-14 md:mt-3 menu p-2 shadow bg-base-100 rounded-box">
                                 <div className="form-control">
                                     <div className="input-group">
-                                        <input id='searchField' type="text" placeholder="Search…" className="input input-bordered w-44 md:w-fit" />
+                                        <input id='searchField' type="text" placeholder="Search…" className="input input-bordered w-48 md:w-fit" />
                                         <button onClick={handeleSearch} className="btn btn-square">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                                         </button>
@@ -113,7 +113,7 @@ const Navbar = () => {
                         <div className={userDetails?.id ? 'block' : 'hidden'}>
                             <div className={(location.pathname.slice(1, 10) === 'dashboard') ? 'hidden' : 'block dropdown dropdown-end'}>
                                 <label tabIndex={0} className="btn bg-base-300 hover:bg-base-content hover:text-base-200 btn-ghost mr-1 btn-circle md:flex"><div className={isEmpty ? 'hidden' : 'badge absolute top-[-5px] right-[-2px]'}>{totalUniqueItems}</div><AiOutlineShoppingCart className="h-5 w-5"></AiOutlineShoppingCart></label>
-                                <ul tabIndex={0} className="dropdown-content grid overflow-x-hidden menu mt-3 p-2 shadow max-h-[80vh] w-69 bg-base-100 rounded-box gap-1">
+                                <ul tabIndex={0} className="dropdown-content grid overflow-x-hidden menu mt-3 p-2 shadow max-h-[80vh] max-w-69 bg-base-100 rounded-box gap-1">
                                     {items.map((item) => (
                                         <li key={item.id}>
                                             <div className='flex flex-col md:flex-row bg-base-200 text-black justify-between'>

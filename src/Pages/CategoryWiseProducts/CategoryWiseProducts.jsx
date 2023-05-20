@@ -29,6 +29,13 @@ const CategoryWiseProducts = () => {
             });
     }, [catId]);
 
+    const ScrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
     const setToCart = (product) => {
         if (userDetails?.id) {
             addItem(product);
@@ -50,7 +57,7 @@ const CategoryWiseProducts = () => {
             <div className={catProducts.length <= 0 ? 'hidden' : 'grid gap-3 lg:grid-cols-4 md:grid-cols-2'}>
                 {catProducts.map(product =>
                     <div key={product.id} className="col-span-1 flex flex-col bg-white border-2 p-4 rounded-lg justify-between">
-                        <Link to={`/product/${product.id}`}>
+                        <Link onClick={ScrollToTop} to={`/product/${product.id}`}>
                             <div>
                                 <div className="bg-white rounded-lg overflow-hidden h-80 w-auto">
                                     <img src={product.image} alt="Your Image" className="h-full w-full" />
