@@ -49,7 +49,7 @@ const ProductDetails = () => {
                 <div className={isLoading ? 'hidden' : 'text-gray-700 body-font overflow-hidden bg-white'}>
                     <div className="container px-5 py-5 mx-auto">
                         <div className="lg:w-4/5 mx-auto flex flex-wrap items-center">
-                            <PhotoView key={product?.id} src={product.image}>
+                            <PhotoView key={product?.id} src={product?.image}>
                                 <img alt={product?.id} className="lg:w-1/2 w-full object-cover md:p-20 p-10 object-center rounded border border-gray-200" src={product?.image} />
                             </PhotoView>
                             <div className="lg:w-1/2 w-full lg:pl-10 mt-6 lg:mt-0">
