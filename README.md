@@ -9,7 +9,11 @@ Live Site : [https://rad-croquembouche-340643.netlify.app/](https://rad-croquemb
 Username : johnd<br />
 Password: m38rmF$
 
-#### All other users except the first user will roll as general users.
+#### All other users of Fakestoreapi except the first user will roll as general users.
+
+[Example of a General User] <br/>
+Username : kevinryan<br />
+Password: kev02937@
 
 ## Available Features
 

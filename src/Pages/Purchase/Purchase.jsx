@@ -27,10 +27,10 @@ const Purchase = () => {
 
     let totalDoc = document.getElementsByClassName("totalPrice");
     if (totalDoc) {
-        for (let i = 0; i <= totalDoc.length; i++) {
+        for (let i = 0; i < totalDoc.length; i++) {
             let totalCost = 0;
-            for (let j = 0; j <= totalDoc[1]?.childNodes?.length; j++) {
-                if (parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) && parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) != '0') {
+            for (let j = 0; j < totalDoc[i]?.childNodes?.length; j++) {
+                if (parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) && parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML) != 0) {
                     totalCost = totalCost + parseFloat(totalDoc[i]?.childNodes[j]?.lastChild?.lastChild?.lastChild?.innerHTML);
                 }
             }
