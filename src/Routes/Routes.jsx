@@ -43,7 +43,6 @@ const router = createBrowserRouter([
       },
       {
         path: '/category/:id',
-        loader: ({ params }) => fetch(`https://fakestoreapi.com/products/category/${params.id}`),
         element: <CategoryWiseProducts></CategoryWiseProducts>
       },
       {

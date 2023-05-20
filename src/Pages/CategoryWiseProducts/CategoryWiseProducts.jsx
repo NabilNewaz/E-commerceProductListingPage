@@ -1,16 +1,33 @@
-import React, { useContext } from 'react';
-import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useCart } from 'react-use-cart';
 import { AuthContext } from '../../Contexts/Authprovider/Authprovider';
 import { toast } from 'react-hot-toast';
+import axios from 'axios';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const CategoryWiseProducts = () => {
     const { userDetails } = useContext(AuthContext);
-    const catProducts = useLoaderData();
+    const catId = useParams();
+    const [catProducts, srtaCatProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { addItem } = useCart();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+
+    useEffect(() => {
+        axios.get(`https://fakestoreapi.com/products/category/${catId.id}`)
+            .then(response => {
+                srtaCatProducts(response.data);
+                setIsLoading(false);
+            })
+            .catch(error => {
+                toast.error('API Not Working Properly');
+                console.log(error);
+                setIsLoading(false);
+            });
+    }, [catId]);
 
     const setToCart = (product) => {
         if (userDetails?.id) {
@@ -23,8 +40,14 @@ const CategoryWiseProducts = () => {
         }
     }
     return (
-        <div className='mt-5'>
-            <div className='grid gap-3 lg:grid-cols-4 md:grid-cols-2'>
+        <div className='mt-5 px-2'>
+            <div className={isLoading ? 'block' : 'hidden'}>
+                <Spinner></Spinner>
+            </div>
+            <div className={catProducts?.length <= 0 && !isLoading ? 'block' : 'hidden'}>
+                <p className='text-slate-400 flex justify-center md:my-0 text-xl font-bold'>No item Found</p>
+            </div>
+            <div className={catProducts.length <= 0 ? 'hidden' : 'grid gap-3 lg:grid-cols-4 md:grid-cols-2'}>
                 {catProducts.map(product =>
                     <div key={product.id} className="col-span-1 flex flex-col bg-white border-2 p-4 rounded-lg justify-between">
                         <Link to={`/product/${product.id}`}>
