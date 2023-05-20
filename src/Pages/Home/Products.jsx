@@ -101,7 +101,7 @@ const Products = () => {
                 </div>
                 <div className='grid gap-3 lg:grid-cols-4 md:grid-cols-2'>
                     {products.map(product =>
-                        <div key={product.id} className="col-span-1 flex flex-col bg-white border-2 p-4 rounded-lg justify-between">
+                        <div key={product.id} className="col-span-1 flex flex-col bg-white border-2 p-4 rounded-lg justify-between dark:bg-[#2a303c] dark:border-gray-400">
                             <Link onClick={ScrollToTop} to={`/product/${product.id}`}>
                                 <div>
                                     <div className="bg-white rounded-lg overflow-hidden h-80 w-auto">

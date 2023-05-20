@@ -27,17 +27,17 @@ const ItemComponent = ({ product, setIsLoading }) => {
                     </div>
                 </div>
                 <div>
-                    <p className='pl-5 text-lg'>{productDetails?.title}</p>
-                    <p className='text-sm pl-5 capitalize'>{productDetails?.category}</p>
+                    <p className='pl-5 text-lg dark:text-gray-400'>{productDetails?.title}</p>
+                    <p className='text-sm pl-5 capitalize dark:text-gray-400'>{productDetails?.category}</p>
                 </div>
             </div>
             <div className='flex justify-between gap-3 items-center mt-2 md:mt-0'>
                 <div className="form-control">
-                    <p className='text-xl'>${productDetails?.price} x {product.quantity}</p>
+                    <p className='text-xl dark:text-gray-400'>${productDetails?.price} x {product.quantity}</p>
                 </div>
                 <div className='flex'>
-                    <span className='font-semibold text-xl'>$</span>
-                    <p className='font-semibold text-xl'>{(parseFloat(productDetails?.price) * parseFloat(product.quantity)).toFixed(2)}</p>
+                    <span className='font-semibold text-xl dark:text-gray-400'>$</span>
+                    <p className='font-semibold text-xl dark:text-gray-400'>{(parseFloat(productDetails?.price) * parseFloat(product.quantity)).toFixed(2)}</p>
                 </div>
             </div>
         </div>

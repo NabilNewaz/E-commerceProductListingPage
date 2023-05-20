@@ -124,10 +124,10 @@ const Navbar = () => {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <p className='w-40'>{item.title}</p>
+                                                        <p className='w-40 dark:text-gray-400'>{item.title}</p>
                                                     </div>
                                                 </div>
-                                                <div className='flex justify-between gap-3 items-center'>
+                                                <div className='flex justify-between gap-3 items-center dark:text-gray-400'>
                                                     <div className="form-control">
                                                         <label className="input-group">
                                                             <span onClick={() => updateItemQuantity(item.id, item.quantity + 1)} className='w-10 hover:bg-slate-950 hover:text-white cursor-pointer'>+</span>

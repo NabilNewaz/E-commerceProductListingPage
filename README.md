@@ -32,6 +32,7 @@ In the project, you can see:
 - Category Wise Product View
 - Product Details Page
 - Private Route Functionality
+- Dark Theme Supported According to System Preference
 
 ---
 
