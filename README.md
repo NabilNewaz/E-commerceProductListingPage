@@ -15,7 +15,7 @@ Password: m38rmF$
 Username : kevinryan<br />
 Password: kev02937@
 
-## Available Features
+## Available Features (All The Main and Bonus Requirements Are Implemented)
 
 In the project, you can see:
 
