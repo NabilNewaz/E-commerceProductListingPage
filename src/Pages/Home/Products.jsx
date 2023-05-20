@@ -17,6 +17,7 @@ const Products = () => {
     const itemsPerPage = 4;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const [shortOrder, setShortOrder] = useState('');
 
     const myRef = useRef(null);
     const executeScroll = () => myRef.current.scrollIntoView()
@@ -33,8 +34,14 @@ const Products = () => {
         });
     };
 
+    const shortProduct = () => {
+        let shortKeyword = document.getElementById('shortField').value;
+        setShortOrder(shortKeyword)
+    }
+
     useEffect(() => {
-        axios.get(`https://fakestoreapi.com/products`)
+        setIsLoading(true);
+        axios.get(`https://fakestoreapi.com/products?sort=${shortOrder}`)
             .then(response => {
                 setAllProducts(response.data);
                 setProducts(response.data.slice(0, 4))
@@ -45,7 +52,7 @@ const Products = () => {
                 console.log(error);
                 setIsLoading(false);
             });
-    }, []);
+    }, [shortOrder]);
 
     useEffect(() => {
         setProducts(allproducts.slice(indexOfFirstItem, indexOfLastItem));
@@ -71,11 +78,25 @@ const Products = () => {
     return (
         <div ref={myRef}>
             <div className='px-2 mt-8 mx-auto'>
-                <div className='mb-3'>
-                    <h1 className='text-3xl uppercase font-bold'>Products</h1>
-                    <p className='text-md'>Find Your Needed Product From Here</p>
+                <div className='mb-3 flex flex-col md:flex-row justify-between'>
+                    <div>
+                        <h1 className='text-3xl uppercase font-bold'>Products</h1>
+                        <p className='text-md'>Find Your Needed Product From Here</p>
+                    </div>
+                    <div className='mt-2 md:mt-0'>
+                        <div className="form-control">
+                            <div className="input-group">
+                                <select id='shortField' className="select select-bordered">
+                                    <option value='' disabled selected>Short By</option>
+                                    <option value=''>Ascending</option>
+                                    <option value='desc'>Descending</option>
+                                </select>
+                                <button onClick={shortProduct} className="btn">Short</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className={isLoading ? 'block pt-8' : 'hidden'}>
+                <div className={isLoading ? 'block pt-8 pb-8' : 'hidden'}>
                     <Spinner></Spinner>
                 </div>
                 <div className='grid gap-3 lg:grid-cols-4 md:grid-cols-2'>
@@ -95,7 +116,7 @@ const Products = () => {
                                     <h1 className="mb-4 font-semibold text-xl">
                                         $ {product.price}
                                     </h1>
-                                    <p className="text-md text-justify">{product.description.split('', 180)}... <span className='font-semibold'>Read More</span></p>
+                                    <p className="text-md text-justify">{product.description.split('', 100)}... <span className='font-semibold'>Read More</span></p>
                                 </div>
                             </Link>
                             <div className='bottom-0'>
